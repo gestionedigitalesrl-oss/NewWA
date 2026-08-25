@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+
+    <title>WA Form</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+<style>
+  @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+
+
+
+.login-page {
+  width: 460px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 560px;
+  margin: 0 auto 200px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form textarea{
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  max-width: 560px;
+  width: 100%;
+  height: 250px;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #1ebea5;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.container:before, .container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: 50px auto;
+  text-align: center;
+}
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #EF3B3A;
+}
+body {
+  background: #1ebea5; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #1ebea5, #1ebea5);
+  background: -moz-linear-gradient(right, #1ebea5, #1ebea5);
+  background: -o-linear-gradient(right, #1ebea5, #1ebea5);
+  background: linear-gradient(to left, #1ebea5, #1ebea5);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}
+</style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+  
+</script>
+</head>
+<body translate="no">
+	<div class="login-page">
+		<div class="form">
+            
+			<form class="login-form" onsubmit="SendMessage1(); return false">
+                
+                <input id="pref" type="text" placeholder="Prefix" value="+39" style="position:absolute;left:48px;width:80px;" size="4"  />
+								<input id="numero" type="text" placeholder="Numero" style="margin-left:60px;width:130px" />
+
+                <div style="height:20px;width:150px;float:right;margin-top:0px;">
+									<label>Richiamare</label> <input type="checkbox" id="RIC" value="1" onclick="handleClick(this);" style="width:20px;"  >Si
+									 
+                </div>
+								<div style="height:20px;width:150px;float:right;margin-top:-38px;">
+										<label>Auto</label> <input id="Auto" type="radio" name="prom" value="Auto" onclick="handleClick(this);" style="width:20px;" checked  >
+										<label>Moto</label> <input id="Moto" type="radio" name="prom" value="Moto" onclick="handleClick(this);" style="width:20px;" >
+									
+                </div>
+
+				
+                <textarea id="testo" type="text" placeholder="Testo" >
+Salve,
+le scrivo da Privacar Trieste. Possiamo aiutarla a trovare l'acquirente per la sua Auto 
+tramite i nostri servizi esclusivi e facendole ricavare il valore richiesto. 
+Ci contatti al numero 040.0646582 per ulteriori informazioni.
+                    
+Facebook: https://www.facebook.com/PrivacarTrieste
+Instagram: https://www.instagram.com/privacar_trieste                    
+-----------------------------------------------------
+https://www.privacar.com/scheda-agenzia/29/trieste
+La nostra sede è situata all'interno del Centro Commerciale Montedoro.
+</textarea>
+				<button type="submit">SEND</button>
+			</form>
+		</div>
+	</div>
+	<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script>
+       
+    
+        
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+        document.body.onload = function()
+        {
+          var cellnum = '';
+          //alert('cell num PRE = ' + cellnum);
+          cellnum = getUrlVars()["CELLNUM"];
+          
+          //cellnum = urlParams.get('CELLNUM')
+          //cellnum = var tech = GetURLParameter('CELLNUM');
+          //cellnum = url.searchParams.get("CELLNUM");
+          //alert('cell num = ' + cellnum);
+          if (typeof cellnum !== 'undefined') {
+            document.getElementById("numero").value = cellnum; 
+          }
+        }
+        
+        function SendMessage1(){
+		
+			//alert('OK');
+			//var cellnum = url.searchParams.get("CELLNUM");
+            //alert('cell num ' + cellnum);
+			var numeroCell = document.getElementById("numero").value.trim();
+            //if (cellnum != "") numeroCell = cellnum;
+            //alert(numeroCell.trim());
+			var testo = document.getElementById("testo").value;
+            var pref = document.getElementById("pref").value;
+			if (numeroCell == ''){ 
+				alert('Inserire il numero di telefono !'); 
+				return;
+			}
+			if (testo == '') { 
+				alert('Inserire il testo !'); 
+				return;
+			}
+            //testo.value = testo.value + " <img src=\"./Pianta centro1.jpg\" width=\"350px\"; height=\"250px\" >";
+			var stringa = "https://web.whatsapp.com/send?phone=" + pref + numeroCell + "&text=" + encodeURI(testo); 
+			//alert(stringa);
+			var tab = window.open(stringa, 'scrollbars=no,menubar=no,height=600,width=800,resizable=yes,toolbar=no,status=no');
+			tab.focus();
+		}
+        
+        //var currentValue = 0;
+        function handleClick(myRadio) 
+        {                
+                var rich =  document.getElementById("RIC").checked;
+                //alert('ok '  + myRadio.value);
+                //alert(rich);
+                
+                
+                var auto_moto = myRadio.value;
+                //alert(auto_moto);
+                if (auto_moto=="1")
+                {  
+                    if(document.getElementById("Auto").checked) auto_moto="Auto";  
+                    if(document.getElementById("Moto").checked) auto_moto="Moto";     
+                }
+                //alert(auto_moto);
+                var link = "";
+                if (auto_moto == "Auto") { link="https://www.privacar.com/scheda-agenzia/29/trieste"; }    
+                else { link = "https://www.privabike.com"; }        
+                //alert(link);
+                
+                
+                
+                if (rich == true){
+                    testo.value=   "Salve, le scrivo da Privacar Trieste in merito all'annuncio della sua " + auto_moto  + ", \n" + 
+                                    "la contatterò telefonicamente per spiegarle il nostro servizio.\n" + 
+                                    "Nel frattempo le indico di seguito il link al nostro sito web se volesse già approfondire:\n" + link + " \n\n";
+                
+                
+                    testo.value = testo.value + 
+                        "----------------------------------------------------- \n" +
+                        "La nostra sede è situata all'interno del Centro Commerciale Montedoro.";  
+                }
+                else
+                {
+                    testo.value=  
+                                "Salve,\n" +
+                                "le scrivo da Privacar Trieste. Possiamo aiutarla a trovare l'acquirente per la sua " + auto_moto  + " tramite \n" +
+                                "i nostri servizi esclusivi e facendole ricavare il valore richiesto. \n" + 
+                                "Ci contatti al numero 040.0646582 per ulteriori informazioni.";
+
+                
+                    testo.value = testo.value + 
+                        "-----------------------------------------------------\n" 
+                        + link + "\n" +
+                        "La nostra sede è situata all'interno del Centro Commerciale Montedoro.";               
+
+                }
+
+                
+                
+           
+                 
+        }
+        
+        
+	 </script>
+	
+   
+</body>
+</html>
