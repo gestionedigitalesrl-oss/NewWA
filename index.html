@@ -61,6 +61,12 @@
     .field { display: flex; flex-direction: column; gap: 7px; }
     .field.full { width: 100%; }
 
+    .extra-options {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+    }
+
     label, legend {
       font-size: 12px;
       font-weight: 650;
@@ -211,6 +217,12 @@
       <div class="field full">
         <label for="testo">Messaggio</label>
         <textarea id="testo" name="testo" required></textarea>
+        <!-- Flag Messaggio al di sotto della box -->
+        <div class="extra-options">
+          <label class="choice">
+            <input id="flagMessaggio" type="checkbox" name="flagMessaggio"> Messaggio
+          </label>
+        </div>
       </div>
 
       <div class="actions">
@@ -227,6 +239,7 @@
       const pref = document.querySelector("#pref");
       const testo = document.querySelector("#testo");
       const richiamare = document.querySelector("#RIC");
+      const flagMessaggio = document.querySelector("#flagMessaggio");
       const status = document.querySelector("#status");
 
       numero.addEventListener("input", () => {
@@ -262,18 +275,20 @@ ${link}
 -----------------------------------------------------
 La nostra sede è situata all'interno del Centro Commerciale Montedoro.`;
         } else {
+          const fraseExtra = flagMessaggio.checked
+            ? " Possiamo aiutarla a trovare l'acquirente per la sua Auto tramite\ni nostri servizi esclusivi e facendole ricavare il valore richiesto.\n"
+            : "\n";
+
           testo.value =
 `Salve,
-le scrivo da Privacar Trieste. Possiamo aiutarla a trovare l'acquirente per la sua ${vehicle} tramite
-i nostri servizi esclusivi e facendole ricavare il valore richiesto.
-Ci contatti al numero 040.0646582 per ulteriori informazioni.
+le scrivo da Privacar Trieste.${fraseExtra}Ci contatti al numero 040.0646582 per ulteriori informazioni.
 -----------------------------------------------------
 ${link}
 La nostra sede è situata all'interno del Centro Commerciale Montedoro.`;
         }
       }
 
-      document.querySelectorAll('input[name="prom"], #RIC')
+      document.querySelectorAll('input[name="prom"], #RIC, #flagMessaggio')
         .forEach(el => el.addEventListener("change", updateMessage));
 
       form.addEventListener("submit", (event) => {
