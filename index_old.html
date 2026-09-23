@@ -317,27 +317,8 @@ La nostra sede è situata all'interno del Centro Commerciale Montedoro.`;
         window.open(url, "_blank", "noopener,noreferrer");
       });
 
-      // Gestione parametri URL (es. ?CELLNUM=3401234567 o ?CELLNUM=+393401234567)
-      const params = getParams();
-      const cellnum = params.get("CELLNUM") || params.get("cellnum");
-      const countryParam = params.get("PREF") || params.get("pref");
-
-      if (countryParam) {
-        pref.value = countryParam.trim().slice(0, 7);
-      }
-
-      if (cellnum) {
-        // Rimuove caratteri non numerici
-        let clean = cellnum.replace(/\D/g, "");
-        
-        // Se inizia con il prefisso italiano '39' ed è più lungo di 10 cifre, rimuove il 39
-        if (clean.length > 10 && clean.startsWith("39")) {
-          clean = clean.substring(2);
-        }
-        
-        // Limita a max 10 cifre
-        numero.value = clean.slice(-10);
-      }
+      const cellnum = getParams().get("CELLNUM");
+      if (cellnum) numero.value = cellnum;
 
       if (!testo.value.trim()) updateMessage();
     })();
