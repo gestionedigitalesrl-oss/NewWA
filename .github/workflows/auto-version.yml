@@ -1,0 +1,63 @@
+name: Auto Version Bump
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths-ignore:
+      - '.github/**'
+      - 'README.md'
+
+permissions:
+  contents: write
+
+jobs:
+  version-bump:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Calculate and Update Version
+        id: bump
+        run: |
+          # 1. Legge la versione attuale da manifest.json
+          CURRENT_VER=$(node -e 'console.log(require("./wa-privacar-extension/manifest.json").version || "1.0.0")')
+          echo "Versione attuale: $CURRENT_VER"
+
+          # 2. Incrementa il numero di patch (es. 1.0 -> 1.0.1 oppure 1.0.1 -> 1.0.2)
+          NEW_VER=$(node -e '
+            const parts = "'$CURRENT_VER'".split(".").map(Number);
+            while (parts.length < 3) parts.push(0);
+            parts[2] = (parts[2] || 0) + 1;
+            console.log(parts.join("."));
+          ')
+          echo "Nuova versione: $NEW_VER"
+          echo "new_version=$NEW_VER" >> $GITHUB_OUTPUT
+
+          # 3. Aggiorna wa-privacar-extension/manifest.json
+          node -e '
+            const fs = require("fs");
+            const file = "./wa-privacar-extension/manifest.json";
+            const json = JSON.parse(fs.readFileSync(file, "utf8"));
+            json.version = "'$NEW_VER'";
+            fs.writeFileSync(file, JSON.stringify(json, null, 2) + "\n");
+          '
+
+          # 4. Aggiorna index.html
+          sed -i -E "s/Versione [0-9]+\.[0-9]+(\.[0-9]+)?/Versione $NEW_VER/g" index.html
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html wa-privacar-extension/manifest.json
+          git commit -m "chore(release): bump version to ${{ steps.bump.outputs.new_version }} [skip ci]" || exit 0
+          git push
+          git tag "v${{ steps.bump.outputs.new_version }}"
+          git push origin "v${{ steps.bump.outputs.new_version }}"
